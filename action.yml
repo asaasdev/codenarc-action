@@ -1,4 +1,4 @@
-name: 'Run codenarc with reviewdog'
+name: 'Run codenarc (Static Analysis for Groovy) with reviewdog'
 description: '🐶 Run codenarc with reviewdog on pull requests to improve code review experience.'
 author: 'luiszimmermann'
 inputs:
