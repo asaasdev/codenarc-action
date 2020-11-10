@@ -49,7 +49,6 @@ jobs:
           github_token: ${{ secrets.github_token }}
           reporter: github-check
           level: warning
-          locale: "US"
 
   alex:
     name: runner / alex
