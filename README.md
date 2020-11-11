@@ -1,10 +1,10 @@
-# action-codenarc
+renam# codenarc-action
 
-[![Test](https://github.com/asaasdev/action-codenarc/workflows/Test/badge.svg)](https://github.com/asaasdev/action-codenarc/actions?query=workflow%3ATest)
-[![reviewdog](https://github.com/asaasdev/action-codenarc/workflows/reviewdog/badge.svg)](https://github.com/asaasdev/action-codenarc/actions?query=workflow%3Areviewdog)
-[![depup](https://github.com/asaasdev/action-codenarc/workflows/depup/badge.svg)](https://github.com/asaasdev/action-codenarc/actions?query=workflow%3Adepup)
-[![release](https://github.com/asaasdev/action-codenarc/workflows/release/badge.svg)](https://github.com/asaasdev/action-codenarc/actions?query=workflow%3Arelease)
-[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/asaasdev/action-codenarc?logo=github&sort=semver)](https://github.com/asaasdev/action-codenarc/releases)
+[![Test](https://github.com/asaasdev/codenarc-action/workflows/Test/badge.svg)](https://github.com/asaasdev/codenarc-action/actions?query=workflow%3ATest)
+[![reviewdog](https://github.com/asaasdev/codenarc-action/workflows/reviewdog/badge.svg)](https://github.com/asaasdev/codenarc-action/actions?query=workflow%3Areviewdog)
+[![depup](https://github.com/asaasdev/codenarc-action/workflows/depup/badge.svg)](https://github.com/asaasdev/codenarc-action/actions?query=workflow%3Adepup)
+[![release](https://github.com/asaasdev/codenarc-action/workflows/release/badge.svg)](https://github.com/asaasdev/codenarc-action/actions?query=workflow%3Arelease)
+[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/asaasdev/codenarc-action?logo=github&sort=semver)](https://github.com/asaasdev/codenarc-action/releases)
 [![action-bumpr supported](https://img.shields.io/badge/bumpr-supported-ff69b4?logo=github&link=https://github.com/haya14busa/action-bumpr)](https://github.com/haya14busa/action-bumpr)
 
 ## Input
@@ -53,7 +53,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: asaasdev/action-codenarc@v1
+      - uses: asaasdev/codenarc-action@v1
         with:
           github_token: ${{ secrets.github_token }}
           # Change reviewdog reporter if you need [github-pr-check,github-check,github-pr-review].
