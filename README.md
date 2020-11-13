@@ -38,6 +38,10 @@ inputs:
   reviewdog_flags:
     description: 'Additional reviewdog flags'
     default: ''
+  ### Parameters for codenarc ###
+  rulesetfiles:
+    description: '-rulesetfiles parameter of codenarc CLI. (This can be a single file path, or multiple paths separated by commas.)'
+    default: 'rulesets/basic.xml'
 ```
 
 ## Usage
