@@ -1,4 +1,4 @@
-renam# codenarc-action
+# codenarc-action
 
 [![Test](https://github.com/asaasdev/codenarc-action/workflows/Test/badge.svg)](https://github.com/asaasdev/codenarc-action/actions?query=workflow%3ATest)
 [![reviewdog](https://github.com/asaasdev/codenarc-action/workflows/reviewdog/badge.svg)](https://github.com/asaasdev/codenarc-action/actions?query=workflow%3Areviewdog)
