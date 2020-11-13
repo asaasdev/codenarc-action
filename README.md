@@ -9,7 +9,6 @@
 
 ## Input
 
-<!-- TODO: update -->
 ```yaml
 inputs:
   github_token:
@@ -45,7 +44,8 @@ inputs:
 ```
 
 ## Usage
-<!-- TODO: update. replace `template` with the linter name -->
+
+The action searches in the root path for the `codenarc.properties`.
 
 ```yaml
 name: reviewdog
@@ -65,4 +65,5 @@ jobs:
           # Change reporter level if you need.
           # GitHub Status Check won't become failure with warning.
           level: warning
+          rulesetfiles: 'rulesets/basic.xml'
 ```
