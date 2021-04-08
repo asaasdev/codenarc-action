@@ -51,8 +51,7 @@ The action searches in the root path for the `codenarc.properties`.
 name: reviewdog
 on: [pull_request]
 jobs:
-  # TODO: change `linter_name`.
-  linter_name:
+  codenarc:
     name: runner / codenarc
     runs-on: ubuntu-latest
     steps:
