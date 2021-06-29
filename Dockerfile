@@ -1,6 +1,6 @@
 FROM asaasdev/codenarc:2.0.0
 
-ENV REVIEWDOG_VERSION=v0.11.0
+ENV REVIEWDOG_VERSION=v0.12.0
 
 USER root
 
