@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2.3.4
-      - uses: haya14busa/action-depup@v1.3.2
+      - uses: haya14busa/action-depup@v1.4.2
         id: depup
         with:
           file: Dockerfile
