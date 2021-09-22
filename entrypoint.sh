@@ -7,7 +7,7 @@ fi
 
 export REVIEWDOG_GITHUB_API_TOKEN="${INPUT_GITHUB_TOKEN}"
 
-codenarc -report=inlineConsole:stdout -rulesetfiles="${INPUT_RULESETFILES}" \
+java -jar /lib/codenarc-all.jar -report="${INPUT_REPORT:-compact:stdout}" -rulesetfiles="${INPUT_RULESETFILES}" \
   | reviewdog -efm="%f:%l:%m" -efm="%f:%r:%m" \
       -name="codenarc" \
       -reporter="${INPUT_REPORTER:-github-pr-check}" \
