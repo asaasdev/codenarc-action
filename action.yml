@@ -5,36 +5,45 @@ inputs:
   github_token:
     description: 'GITHUB_TOKEN'
     default: '${{ github.token }}'
+    required: false
   workdir:
     description: 'Working directory relative to the root directory.'
     default: '.'
+    required: false
   ### Flags for reviewdog ###
   level:
     description: 'Report level for reviewdog [info,warning,error]'
     default: 'error'
+    required: false
   reporter:
     description: 'Reporter of reviewdog command [github-pr-check,github-pr-review].'
     default: 'github-pr-check'
+    required: false
   filter_mode:
     description: |
       Filtering mode for the reviewdog command [added,diff_context,file,nofilter].
       Default is added.
     default: 'added'
+    required: false
   fail_on_error:
     description: |
       Exit code for reviewdog when errors are found [true,false]
       Default is `false`.
     default: 'false'
+    required: false
   reviewdog_flags:
     description: 'Additional reviewdog flags'
     default: ''
+    required: false
   ### Parameters for codenarc ###
   report:
     description: '-report parameter of codenarc CLI.'
-    default: 'compact:stdout'  
+    default: 'compact:stdout'
+    required: false
   rulesetfiles:
     description: '-rulesetfiles parameter of codenarc CLI. (This can be a single file path, or multiple paths separated by commas.)'
     default: 'rulesets/basic.xml'
+    required: false
 runs:
   using: 'docker'
   image: 'docker://docker.io/asaasdev/codenarc:pr-19'
