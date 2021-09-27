@@ -37,7 +37,7 @@ inputs:
     default: 'rulesets/basic.xml'
 runs:
   using: 'docker'
-  image: 'docker://docker.io/asaasdev/codenarc:v2.1.0-beta'
+  image: 'docker://docker.io/asaasdev/codenarc:pr-19'
 
 # Ref: https://haya14busa.github.io/github-action-brandings/
 # TODO: update branding if you want.
