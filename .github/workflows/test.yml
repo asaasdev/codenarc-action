@@ -9,7 +9,7 @@ jobs:
     name: runner / codenarc (github-check)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2.3.4
+      - uses: actions/checkout@v2.3.5
       - uses: ./
         with:
           github_token: ${{ secrets.github_token }}
@@ -21,7 +21,7 @@ jobs:
     name: runner / codenarc (github-pr-check)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2.3.4
+      - uses: actions/checkout@v2.3.5
       - uses: ./
         with:
           github_token: ${{ secrets.github_token }}
@@ -34,7 +34,7 @@ jobs:
     name: runner / codenarc (github-pr-review)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2.3.4
+      - uses: actions/checkout@v2.3.5
       - uses: ./
         with:
           github_token: ${{ secrets.github_token }}
