@@ -51,7 +51,7 @@ jobs:
       - uses: ./
         with:
           github_token: ${{ secrets.github_token }}
-          reporter: github-check
-          level: error
+          reporter: github-pr-review
           workdir: ./testdata/
+          fail_on_error: true
           rulesetfiles: 'file:invalid-rules-file.xml'
