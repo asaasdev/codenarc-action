@@ -41,3 +41,18 @@ jobs:
           reporter: github-pr-review
           level: error
           reviewdog_flags: -filter-mode=file -fail-on-error
+
+  test-invalid-rule-file:
+    if: github.event_name == 'pull_request'
+    name: runner / codenarc (test-invalid-rule-file)
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./
+        with:
+          github_token: ${{ secrets.github_token }}
+          reporter: github-pr-review
+          workdir: ./testdata/
+          fail_on_error: true
+          rulesetfiles: 'file:invalid-rules-file.xml'
