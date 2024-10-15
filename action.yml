@@ -51,19 +51,6 @@ inputs:
 runs:
   using: 'docker'
   image: 'docker://docker.io/asaasdev/codenarc:2.2.0'
-  args:
-  - >
-    sh -c '
-    DEFAULT_RULESETFILES="rulesets/basic.xml";
-    if [ "${{ inputs.grails_version }}" != "2" ]; then
-      GRAILS_RULESET="rulesets/grails4.xml";
-    else
-      GRAILS_RULESET="rulesets/grails2.xml";
-    fi;
-    
-    RULESETFILES="$DEFAULT_RULESETFILES,$GRAILS_RULESET,${{ inputs.rulesetfiles }}";
-
-    export INPUT_RULESETFILES="$RULESETFILES";
 
 # Ref: https://haya14busa.github.io/github-action-brandings/
 # TODO: update branding if you want.
