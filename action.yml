@@ -55,10 +55,10 @@ runs:
   - >
     sh -c '
     DEFAULT_RULESETFILES="rulesets/basic.xml";
-    if [ "${{ inputs.grails_version }}" = "2" ]; then
-      GRAILS_RULESET="rulesets/grails2.xml";
-    else
+    if [ "${{ inputs.grails_version }}" != "2" ]; then
       GRAILS_RULESET="rulesets/grails4.xml";
+    else
+      GRAILS_RULESET="rulesets/grails2.xml";
     fi;
     
     RULESETFILES="$DEFAULT_RULESETFILES,$GRAILS_RULESET,${{ inputs.rulesetfiles }}";
