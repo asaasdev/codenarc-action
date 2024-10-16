@@ -42,7 +42,7 @@ inputs:
     required: false
   rulesetfiles:
     description: '-rulesetfiles parameter of codenarc CLI. (This can be a single file path, or multiple paths separated by commas.)'
-    default: 'rulesets/basic.xml'
+    default: 'https://raw.githubusercontent.com/asaasdev/codenarc-action/refs/heads/DVT-3-criar-regras-centralizadas/rulesets/basics.xml'
     required: false
   grails_version:
     description: 'Specify version of grails to determine rulesets.'
