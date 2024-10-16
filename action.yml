@@ -50,23 +50,8 @@ inputs:
 runs:
   using: 'docker'
   image: 'docker://docker.io/asaasdev/codenarc:2.2.0'
-  args:
-  - >
-    sh -c '
-    DEFAULT_RULESETFILES="https://raw.githubusercontent.com/asaasdev/codenarc-action/refs/heads/DVT-3-criar-regras-centralizadas/rulesets/basics.xml";
-    if [ "${{ inputs.grails_version }}" = "2" ]; then
-      GRAILS_RULESET="https://raw.githubusercontent.com/asaasdev/codenarc-action/refs/heads/DVT-3-criar-regras-centralizadas/rulesets/grails2.xml";
-    else
-      GRAILS_RULESET="https://raw.githubusercontent.com/asaasdev/codenarc-action/refs/heads/DVT-3-criar-regras-centralizadas/rulesets/grails4.xml";
-    fi;
-    
-    if [ -n "${{ inputs.rulesetfiles }}" ]; then
-      RULESETFILES="$DEFAULT_RULESETFILES,$GRAILS_RULESET,${{ inputs.rulesetfiles }}";
-    else
-      RULESETFILES="$DEFAULT_RULESETFILES,$GRAILS_RULESET";
-    fi;
-
-    export INPUT_RULESETFILES="$RULESETFILES";
+  env:
+    INPUT_RULESETFILES: https://raw.githubusercontent.com/asaasdev/codenarc-action/refs/heads/DVT-3-criar-regras-centralizadas/rulesets/basics.xml
 # Ref: https://haya14busa.github.io/github-action-brandings/
 # TODO: update branding if you want.
 branding:
