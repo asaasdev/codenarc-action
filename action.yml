@@ -1,6 +1,50 @@
 name: 'Run codenarc (Static Analysis for Groovy) with reviewdog'
 description: '🐶 Run codenarc with reviewdog on pull requests to improve code review experience.'
 author: 'luiszimmermann'
+jobs:
+  codenarc-analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set dynamic INPUT_RULESETFILES
+        id: set_ruleset
+        run: |
+          run: |
+          URL_BASIC="https://raw.githubusercontent.com/asaasdev/codenarc-action/refs/heads/DVT-3-criar-regras-centralizadas/rulesets/basics.xml"
+          URL_GRAILS2="https://raw.githubusercontent.com/asaasdev/codenarc-action/refs/heads/DVT-3-criar-regras-centralizadas/rulesets/grails2.xml"
+          URL_GRAILS5="https://raw.githubusercontent.com/asaasdev/codenarc-action/refs/heads/DVT-3-criar-regras-centralizadas/rulesets/grails4.xml"
+
+          RULESETFILES="$URL_BASIC"
+          if [ "${{ inputs.grails_version }}" == "2" ]; then
+            RULESETFILES="$RULESETFILES,$URL_GRAILS2"
+          else
+            RULESETFILES="$RULESETFILES,$URL_GRAILS5"
+          fi
+
+          if [ ! -z "${{ inputs.file_input }}" ]; then
+            RULESETFILES="$RULESETFILES,${{ inputs.file_input }}"
+          fi
+          echo "INPUT_RULESETFILES=$RULESETFILES" >> $GITHUB_ENV
+
+      - name: Run codenarc with reviewdog
+        uses: docker://docker.io/asaasdev/codenarc:2.2.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          INPUT_RULESETFILES: ${{ env.INPUT_RULESETFILES }}
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          workdir: ${{ inputs.workdir }}
+          level: ${{ inputs.level }}
+          reporter: ${{ inputs.reporter }}
+          filter_mode: ${{ inputs.filter_mode }}
+          fail_on_error: ${{ inputs.fail_on_error }}
+          reviewdog_flags: ${{ inputs.reviewdog_flags }}
+          report: ${{ inputs.report }}
+          rulesetfiles: ${{ env.INPUT_RULESETFILES }}
+          grails_version: ${{ inputs.grails_version }}
+
 inputs:
   github_token:
     description: 'GITHUB_TOKEN'
@@ -10,7 +54,9 @@ inputs:
     description: 'Working directory relative to the root directory.'
     default: '.'
     required: false
-  ### Flags for reviewdog ###
+  ruleset_type:
+    description: 'Specify the type of ruleset to use (basic, advanced, or leave blank for default).'
+    required: false
   level:
     description: 'Report level for reviewdog [info,warning,error]'
     default: 'error'
@@ -35,49 +81,18 @@ inputs:
     description: 'Additional reviewdog flags'
     default: ''
     required: false
-  ### Parameters for codenarc ###
   report:
     description: '-report parameter of codenarc CLI.'
     default: 'compact:stdout'
     required: false
   grails_version:
     description: 'Specify version of grails to determine rulesets.'
-    default: '5'
+    default: '2'
     required: false
   file_input:
-    description: 'Local FIle'
+    description: 'Local file.'
     required: false
-runs:
-  using: 'docker'
-  image: 'docker://docker.io/asaasdev/codenarc:2.2.0'
-  env:
-      INPUT_RULESETFILES: '${{ steps.set_rulesetfiles.outputs.rulesetfiles }}'
-jobs:
-  set_rulesetfiles:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Set rulesetfiles
-        id: set_rulesetfiles
-        run: |
-          URL_BASIC="https://raw.githubusercontent.com/asaasdev/codenarc-action/refs/heads/DVT-3-criar-regras-centralizadas/rulesets/basics.xml"
-          URL_GRAILS2="https://raw.githubusercontent.com/asaasdev/codenarc-action/refs/heads/DVT-3-criar-regras-centralizadas/rulesets/grails2.xml"
-          URL_GRAILS5="https://raw.githubusercontent.com/asaasdev/codenarc-action/refs/heads/DVT-3-criar-regras-centralizadas/rulesets/grails4.xml"
 
-          RULESETFILES="$URL_BASIC"
-          if [ "${{ inputs.grails_version }}" == "2" ]; then
-            RULESETFILES="$RULESETFILES,$URL_GRAILS2"
-          else
-            RULESETFILES="$RULESETFILES,$URL_GRAILS5"
-          fi
-
-          if [ ! -z "${{ inputs.file_input }}" ]; then
-            RULESETFILES="$RULESETFILES,${{ inputs.file_input }}"
-          fi
-
-          echo "::set-output name=rulesetfiles::$RULESETFILES"  
-
-# Ref: https://haya14busa.github.io/github-action-brandings/
-# TODO: update branding if you want.
 branding:
   icon: 'check'
   color: 'blue'
