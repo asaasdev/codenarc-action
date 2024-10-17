@@ -42,14 +42,39 @@ inputs:
     required: false
   grails_version:
     description: 'Specify version of grails to determine rulesets.'
-    default: '2'
+    default: '5'
+    required: false
+  file_input:
+    description: 'Local FIle'
     required: false
 runs:
   using: 'docker'
   image: 'docker://docker.io/asaasdev/codenarc:2.2.0'
   env:
-      INPUT_RULESETFILES: 'https://raw.githubusercontent.com/asaasdev/codenarc-action/refs/heads/DVT-3-criar-regras-centralizadas/rulesets/basics.xml'
-      
+      INPUT_RULESETFILES: '${{ steps.set_rulesetfiles.outputs.rulesetfiles }}'
+jobs:
+  set_rulesetfiles:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set rulesetfiles
+        id: set_rulesetfiles
+        run: |
+          URL_BASIC="https://raw.githubusercontent.com/asaasdev/codenarc-action/refs/heads/DVT-3-criar-regras-centralizadas/rulesets/basics.xml"
+          URL_GRAILS2="https://raw.githubusercontent.com/asaasdev/codenarc-action/refs/heads/DVT-3-criar-regras-centralizadas/rulesets/grails2.xml"
+          URL_GRAILS5="https://raw.githubusercontent.com/asaasdev/codenarc-action/refs/heads/DVT-3-criar-regras-centralizadas/rulesets/grails4.xml"
+
+          RULESETFILES="$URL_BASIC"
+          if [ "${{ inputs.grails_version }}" == "2" ]; then
+            RULESETFILES="$RULESETFILES,$URL_GRAILS2"
+          else
+            RULESETFILES="$RULESETFILES,$URL_GRAILS5"
+          fi
+
+          if [ ! -z "${{ inputs.file_input }}" ]; then
+            RULESETFILES="$RULESETFILES,${{ inputs.file_input }}"
+          fi
+
+          echo "::set-output name=rulesetfiles::$RULESETFILES"  
 
 # Ref: https://haya14busa.github.io/github-action-brandings/
 # TODO: update branding if you want.
