@@ -51,7 +51,7 @@ runs:
   using: 'docker'
   image: 'docker://docker.io/asaasdev/codenarc:2.2.0'
   env:
-    INPUT_RULESETFILES: https://raw.githubusercontent.com/asaasdev/codenarc-action/refs/heads/DVT-3-criar-regras-centralizadas/rulesets/basics.xml,${{ fromJSON(inputs.grails_version) > 2 && 'https://raw.githubusercontent.com/asaasdev/codenarc-action/refs/heads/DVT-3-criar-regras-centralizadas/rulesets/grails2.xml' || 'https://raw.githubusercontent.com/asaasdev/codenarc-action/refs/heads/DVT-3-criar-regras-centralizadas/rulesets/grails4.xml' }}${{ inputs.rulefiles == '' && format(',{0}', inputs.rulefiles) || '' }}
+    INPUT_RULESETFILES: https://raw.githubusercontent.com/asaasdev/codenarc-action/refs/heads/DVT-3-criar-regras-centralizadas/rulesets/basics.xml,${{ fromJSON(inputs.grails_version) == 2 && 'https://raw.githubusercontent.com/asaasdev/codenarc-action/refs/heads/DVT-3-criar-regras-centralizadas/rulesets/grails2.xml' || 'https://raw.githubusercontent.com/asaasdev/codenarc-action/refs/heads/DVT-3-criar-regras-centralizadas/rulesets/grails4.xml' }}${{ inputs.rulefiles == '' && format(',{0}', inputs.rulefiles) || '' }}
 
 # Ref: https://haya14busa.github.io/github-action-brandings/
 # TODO: update branding if you want.
