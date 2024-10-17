@@ -44,14 +44,14 @@ inputs:
     description: 'Specify version of grails to determine rulesets.'
     default: '5'
     required: false
-  file_input:
+  rulefiles:
     description: 'Local FIle'
     required: false
 runs:
   using: 'docker'
   image: 'docker://docker.io/asaasdev/codenarc:2.2.0'
   env:
-    INPUT_RULESETFILES: https://raw.githubusercontent.com/asaasdev/codenarc-action/refs/heads/DVT-3-criar-regras-centralizadas/rulesets/basics.xml,${{ inputs.grails_version == '5' && 'https://raw.githubusercontent.com/asaasdev/codenarc-action/refs/heads/DVT-3-criar-regras-centralizadas/rulesets/grails4.xml' || 'https://raw.githubusercontent.com/asaasdev/codenarc-action/refs/heads/DVT-3-criar-regras-centralizadas/rulesets/grails2.xml' }}
+    INPUT_RULESETFILES: https://raw.githubusercontent.com/asaasdev/codenarc-action/refs/heads/DVT-3-criar-regras-centralizadas/rulesets/basics.xml,${{ inputs.grails_version == '5' && 'https://raw.githubusercontent.com/asaasdev/codenarc-action/refs/heads/DVT-3-criar-regras-centralizadas/rulesets/grails4.xml' || 'https://raw.githubusercontent.com/asaasdev/codenarc-action/refs/heads/DVT-3-criar-regras-centralizadas/rulesets/grails2.xml' }}${{ inputs.rulefiles == '' && format(',{0}', inputs.rulefiles) || '' }}
 
 # Ref: https://haya14busa.github.io/github-action-brandings/
 # TODO: update branding if you want.
